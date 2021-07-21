@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453172104625",
+    "project_id": "ongc-intern-2021",
+    "storage_bucket": "ongc-intern-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453172104625:android:f3ca8ec742e2a3650fc190",
+        "android_client_info": {
+          "package_name": "com.example.ongc_intern_2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453172104625-e4olrvfp7rog6584curo38to8gi1031r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTvf3oZkhomS7P8zvzLQCFSbkYDo0Xp5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453172104625-e4olrvfp7rog6584curo38to8gi1031r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
