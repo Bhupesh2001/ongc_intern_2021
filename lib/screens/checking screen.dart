@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ongc_intern_2021/screens/employee_home.dart';
-import 'package:ongc_intern_2021/screens/employee_login_page.dart';
 import 'package:ongc_intern_2021/utility/local_database.dart';
 import 'package:telephony/telephony.dart';
 
@@ -15,7 +14,6 @@ class CheckingPage extends StatefulWidget {
 }
 
 class _CheckingPageState extends State<CheckingPage> {
-  String _message = "";
   final telephony = Telephony.instance;
 
   @override

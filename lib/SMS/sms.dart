@@ -10,17 +10,12 @@ class SMS {
       return;
     }
 
-    inboxMessages = await telephony.getInboxSms(columns: [
-      SmsColumn.DATE,
-      SmsColumn.ADDRESS,
-      SmsColumn.BODY
-    ],  filter: SmsFilter.where(SmsColumn.ADDRESS)
-				 .equals("7253018338")
-				 .and(SmsColumn.BODY)
-				 .like("ONGC"),
-         sortOrder: [
-      OrderBy(SmsColumn.DATE, sort: Sort.DESC)
-    ]);
-    
+    inboxMessages = await telephony.getInboxSms(
+        columns: [SmsColumn.DATE, SmsColumn.ADDRESS, SmsColumn.BODY],
+        filter: SmsFilter.where(SmsColumn.ADDRESS)
+            .equals("7906573815")
+            .and(SmsColumn.BODY)
+            .like("ONGC"),
+        sortOrder: [OrderBy(SmsColumn.DATE, sort: Sort.DESC)]);
   }
 }

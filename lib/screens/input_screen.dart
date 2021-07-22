@@ -61,7 +61,7 @@ class _InputScreenState extends State<InputScreen> {
           initialSelectedDate: DateTime.now(),
           selectionColor: Colors.black,
           selectedTextColor: Colors.white,
-          daysCount: 50,
+          daysCount: 20,
           onDateChange: (date) {
             setState(() {
               _selectedValue = date;
@@ -79,8 +79,6 @@ class _InputScreenState extends State<InputScreen> {
       ],
     );
   }
-
-// save,sent ,auto fill
 
   Widget header() {
     return Row(
@@ -104,17 +102,12 @@ class _InputScreenState extends State<InputScreen> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3.0),
-          //TODO Complete encryption
           child: ElevatedButton(
             onPressed: () {
               reportSend(MyTable.getData());
             },
             child: Text("Sent"),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 3.0),
-          child: ElevatedButton(onPressed: () {}, child: Text("Auto Fill")),
         ),
       ],
     );
@@ -148,5 +141,5 @@ class _InputScreenState extends State<InputScreen> {
 void reportSend(List<String> data) async {
   final Telephony telephony = Telephony.instance;
   await telephony.sendSms(
-      to: "7253018338", message: "ONGC Report " + data.join(" "));
+      to: "7906573815", message: "ONGC Report " + data.join(" "));
 }
