@@ -15,6 +15,8 @@ class InputScreen extends StatefulWidget {
   _InputScreenState createState() => _InputScreenState();
 }
 
+bool autoFilled = false;
+
 class _InputScreenState extends State<InputScreen> {
   List<List<String>> a;
   ScrollController scrollController = ScrollController();
@@ -73,7 +75,9 @@ class _InputScreenState extends State<InputScreen> {
           padding: const EdgeInsets.only(bottom: 58.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: MyTable.displayTable(context, data),
+            child: autoFilled
+                ? MyTable.displayTable(context, data)
+                : MyTable.displayTable(context, List.filled(21, '')),
           ),
         ),
       ],
@@ -107,6 +111,17 @@ class _InputScreenState extends State<InputScreen> {
               reportSend(MyTable.getData());
             },
             child: Text("Sent"),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 3.0),
+          child: ElevatedButton(
+            onPressed: () {
+              setState(() {
+                autoFilled = !autoFilled;
+              });
+            },
+            child: Text("Auto Filled"),
           ),
         ),
       ],
