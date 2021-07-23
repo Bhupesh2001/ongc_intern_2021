@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ongc_intern_2021/Model/transaction.dart';
+import 'package:ongc_intern_2021/constants.dart';
 import 'package:ongc_intern_2021/screens/testing.dart';
 import 'package:ongc_intern_2021/utility/boxes.dart';
 import 'package:telephony/telephony.dart';
@@ -16,6 +17,9 @@ class InputScreen extends StatefulWidget {
 }
 
 bool autoFilled = false;
+bool isSent = false;
+bool saved = false;
+bool autoSaved = false;
 
 class _InputScreenState extends State<InputScreen> {
   List<List<String>> a;
@@ -80,6 +84,11 @@ class _InputScreenState extends State<InputScreen> {
                 : MyTable.displayTable(context, List.filled(21, '')),
           ),
         ),
+        if (isSent)
+          Text(
+            "Project completed",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          )
       ],
     );
   }
@@ -91,37 +100,61 @@ class _InputScreenState extends State<InputScreen> {
         Spacer(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3.0),
-          child: ElevatedButton(
-              onPressed: () {
-                try {
-                  editTransaction(
-                      transactions[0], 'dummy', MyTable.getData(), false);
-                } catch (e) {
-                  addTransaction("dummy", false, MyTable.getData());
-                }
-                print(m);
-                print("Save");
-              },
-              child: Text("Save")),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 3.0),
-          child: ElevatedButton(
-            onPressed: () {
-              reportSend(MyTable.getData());
-            },
-            child: Text("Sent"),
+          child: Opacity(
+            opacity: saved || isSent ? 0.5 : 1,
+            child: ElevatedButton(
+                onPressed: () {
+                  if (saved) {
+                    toast("Already Saved");
+                    return;
+                  }
+                  try {
+                    editTransaction(
+                        transactions[0], 'dummy', MyTable.getData(), false);
+                  } catch (e) {
+                    addTransaction("dummy", false, MyTable.getData());
+                  }
+                  setState(() {
+                    saved = true;
+                    autoFilled = true;
+                  });
+                  print(m);
+                  print("Save");
+                },
+                child: Text("Save")),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 3.0),
-          child: ElevatedButton(
-            onPressed: () {
-              setState(() {
-                autoFilled = !autoFilled;
-              });
-            },
-            child: Text("Auto Filled"),
+        Opacity(
+          opacity: isSent ? 0.5 : 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (isSent) {
+                  toast("Already Sent");
+                  return;
+                }
+                reportSend(MyTable.getData());
+                setState(() {
+                  isSent = true;
+                });
+              },
+              child: Text("Sent"),
+            ),
+          ),
+        ),
+        Opacity(
+          opacity: autoFilled || isSent ? 0.5 : 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  autoFilled = !autoFilled;
+                });
+              },
+              child: autoFilled ? Text("Clear") : Text("Auto Filled"),
+            ),
           ),
         ),
       ],

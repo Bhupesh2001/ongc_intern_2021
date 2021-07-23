@@ -10,7 +10,7 @@ void toast(String text) {
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.grey[50],
-      textColor: Colors.white,
+      textColor: Colors.black,
       fontSize: 16.0);
 }
 
