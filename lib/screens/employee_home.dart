@@ -26,76 +26,13 @@ class EmployeeHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
+        child: Icon(Icons.file_upload),
         onPressed: refresh,
       ),
       drawer: MyDrawer(),
       appBar: AppBar(
         title: Text("ONGC's Employee"),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                TextEditingController tecCurrent = TextEditingController();
-                TextEditingController tecNew = TextEditingController();
-                TextEditingController tecConfirm = TextEditingController();
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Change password"),
-                        actions: [
-                          InkWell(
-                            onTap: () async {
-                              var path = FirebaseFirestore.instance
-                                  .collection("Employee")
-                                  .doc(SharedPrefHelper.myUid());
-                              DocumentSnapshot doc = await path.get();
-                              String currentPass = doc['password'].toString();
-                              if (tecCurrent.text == currentPass) {
-                                if (tecNew.text == tecConfirm.text &&
-                                    tecConfirm.text.length > 2)
-                                  path.update({"password": tecNew.text}).then(
-                                      (value) {
-                                    Navigator.pop(context);
-                                    toast("Update Successful");
-                                  });
-                                else
-                                  toast("Enter a valid password");
-                              } else
-                                toast("Incorrect password");
-                            }, //Todo Update password
-                            child: Text(
-                              "Done",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextField(
-                                decoration: InputDecoration(
-                                    hintText: "Current Password"),
-                                controller: tecCurrent),
-                            TextField(
-                                decoration:
-                                    InputDecoration(hintText: "New Password"),
-                                controller: tecNew),
-                            TextField(
-                                decoration: InputDecoration(
-                                    hintText: "Confirm Password"),
-                                controller: tecConfirm),
-                          ],
-                        ),
-                      );
-                    });
-              },
-              child: Icon(Icons.vpn_key),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
